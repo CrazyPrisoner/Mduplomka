@@ -1,48 +1,98 @@
 <template>
-  <swiper :options="swiperOption" class="hot_swiper">
-    <swiper-slide v-for="slide in swiperSlides" :key="slide">I'm Slide {{ slide }}</swiper-slide>
-  </swiper>
+    <div class="row course-cards">
+    <div v-for="(card_bj, index) in cards" :key="index" class="col s12 m3">
+      <div class="card">
+        <div class="card-image">
+          <img :src="card_bj.image">
+          <span class="card-title">{{card_bj.title}}</span>
+        </div>
+        <div class="card-content">
+          <p>{{card_bj.description}}</p>
+        </div>
+        <div class="card-action">
+          <router-link tag="button" class="btn waves-effect waves-light" type="button" name="action" :to="'/course?id=' + index">More</router-link>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
-  export default {
-    name: 'hot',
-    data() {
-      return {
-        swiperOption: {
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false
-          },
-          slidesPerView: 5,
-          spaceBetween: 30,
-          loop: true
+ export default {
+
+    data:() => ({
+      cards: [
+        {
+          title: "Listening",
+          description : "Learn english language with listening",
+          image : "https://digitalpianoexpert.org/wp-content/uploads/2018/11/actor-adult-back-view-374832.jpg"
         },
-        swiperSlides: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-      }
-    }
-  }
+        {
+          title: "Reading",
+          description : "Learn english language with reading",
+          image : "https://www.fluentu.com/blog/english/wp-content/uploads/sites/4/2015/07/how-to-improve-english-reading-skills.jpg"
+        },
+        {
+          title: "Writing",
+          description : "Learn english language with writing",
+          image : "https://st2.depositphotos.com/8956756/11886/i/950/depositphotos_118866746-stock-photo-young-teacher-writing-english-grammar.jpg"
+        },
+        {
+          title: "Speaking",
+          description : "Learn english language with speaking",
+          image : "https://miro.medium.com/max/1400/1*2cLJVbjnO4VgdAgETlTEOQ.png"
+        },
+      ]
+    })
+    
+ }
+ 
+0
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../src/scss/common.scss';
-  .hot_swiper {
-    background-color: #fff;
-    text-align: center;
-    height: 240px;
-    .swiper-wrapper {
-      -webkit-transition-timing-function: linear;
-      -moz-transition-timing-function: linear;
-      -o-transition-timing-function: linear;
-      transition-timing-function: linear;
-      margin: 0 auto;
-    }
-    .swiper-wrapper:nth-child(2n) {
-      background-color: cornflowerblue;
-    }
-    .swiper-wrapper:nth-child(2n+1) {
-      background-color: rosybrown;
-    }
-  }
+.course-cards{
+  display: flex;
+  margin: 0 0 3rem;
+}
+.card{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column;
+  height: 100%;
+}
+ .card-content{
+   p{
+     font-size: 1rem;
+   }
+ }
+ .card-image{
+   height: 220px;
+   img{
+    height: 100%;
+    object-fit: cover;
+   }
+   span{
+     z-index: 1;
+     text-align: center;
+     &::before{
+       content: '';
+       position: absolute;
+       background-color: rgba(0, 0, 0, 0.476);
+       width: 100%;
+       height: 38px;
+       left: 0px;
+       z-index: -1;
+     }
+   }
+ }
+ .card-action{
+   a {
+     font-size: 1rem;
+   }
+ }
+ .course-cards {
+  margin-top: 2rem; 
+ }
+
 </style>
